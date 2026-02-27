@@ -22,7 +22,7 @@ class BaseAgent:
         self.model = model
         self.system_prompt = system_prompt
 
-    def call(self, user_message: str, max_tokens: int = 4096) -> str:
+    def call(self, user_message: str, max_tokens: int = 8192) -> str:
         """Gemini APIを呼び出してテキスト応答を取得"""
         logger.info(f"[{self.__class__.__name__}] API呼び出し開始")
         response = self.client.models.generate_content(
@@ -37,7 +37,7 @@ class BaseAgent:
         logger.info(f"[{self.__class__.__name__}] API呼び出し完了 ({len(text)}文字)")
         return text
 
-    def call_json(self, user_message: str, max_tokens: int = 4096) -> dict[str, Any]:
+    def call_json(self, user_message: str, max_tokens: int = 8192) -> dict[str, Any]:
         """Gemini APIを呼び出してJSON応答をパース"""
         raw = self.call(user_message, max_tokens)
         return self._parse_json(raw)
