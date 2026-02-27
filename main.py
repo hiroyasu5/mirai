@@ -77,7 +77,7 @@ def main():
     args = parser.parse_args()
 
     # 初期化
-    load_dotenv()
+    load_dotenv(override=True)
     setup_logging(args.verbose)
     config = load_config(args.config)
 
