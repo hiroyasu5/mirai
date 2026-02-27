@@ -1,0 +1,52 @@
+# MIRAI パイプライン設定
+
+# モデル設定
+models:
+  researcher: "grok-4"
+  analyst: "claude-sonnet-4-20250514"
+  editor: "claude-sonnet-4-20250514"
+
+# リサーチ設定
+research:
+  topics:
+    tech:
+      label: "テクノロジー"
+      queries:
+        - "AI artificial intelligence breakthrough 2026"
+        - "semiconductor chip technology latest"
+        - "robotics automation humanoid"
+        - "quantum computing progress"
+    econ:
+      label: "経済・マーケット"
+      queries:
+        - "global economy market outlook 2026"
+        - "cryptocurrency bitcoin ethereum regulation"
+        - "interest rates central bank policy"
+        - "supply chain trade geopolitics"
+    social:
+      label: "社会・文化"
+      queries:
+        - "remote work future workforce"
+        - "climate tech clean energy transition"
+        - "population demographics aging society"
+        - "education technology edtech"
+  # X検索フィルタ
+  min_likes: 100
+  min_retweets: 20
+  time_range: "48h"
+
+# レポート設定
+report:
+  output_dir: "reports"
+  predictions_file: "data/predictions.json"
+
+# Discord設定
+discord:
+  enabled: true
+  max_message_length: 2000
+
+# パイプライン設定
+pipeline:
+  verbose: false
+  cache_signals: true
+  cache_dir: "data/cache"
