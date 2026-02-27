@@ -3,8 +3,8 @@
 # モデル設定
 models:
   researcher: "grok-4"
-  analyst: "gpt-4o-mini"
-  editor: "gpt-4o-mini"
+  analyst: "gemini-2.5-flash"
+  editor: "gemini-2.5-flash"
 
 # リサーチ設定
 research:

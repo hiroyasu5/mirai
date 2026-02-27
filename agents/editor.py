@@ -44,7 +44,7 @@ class Editor(BaseAgent):
 
     def __init__(self, config: dict):
         super().__init__(
-            api_key=os.getenv("OPENAI_API_KEY"),
+            api_key=os.getenv("GEMINI_API_KEY"),
             model=config["models"]["editor"],
             system_prompt=SYSTEM_PROMPT,
         )
