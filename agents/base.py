@@ -1,5 +1,5 @@
 """
-BaseAgent - Claude API ラッパー
+BaseAgent - OpenAI API ラッパー
 全アナリスト・エディタの基底クラス
 """
 
@@ -8,29 +8,31 @@ import logging
 import re
 from typing import Any
 
-import anthropic
+from openai import OpenAI
 
 logger = logging.getLogger(__name__)
 
 
 class BaseAgent:
-    """Claude APIを使用するエージェントの基底クラス"""
+    """OpenAI APIを使用するエージェントの基底クラス"""
 
     def __init__(self, api_key: str, model: str, system_prompt: str):
-        self.client = anthropic.Anthropic(api_key=api_key)
+        self.client = OpenAI(api_key=api_key)
         self.model = model
         self.system_prompt = system_prompt
 
     def call(self, user_message: str, max_tokens: int = 4096) -> str:
-        """Claude APIを呼び出してテキスト応答を取得"""
+        """OpenAI APIを呼び出してテキスト応答を取得"""
         logger.info(f"[{self.__class__.__name__}] API呼び出し開始")
-        response = self.client.messages.create(
+        response = self.client.chat.completions.create(
             model=self.model,
             max_tokens=max_tokens,
-            system=self.system_prompt,
-            messages=[{"role": "user", "content": user_message}],
+            messages=[
+                {"role": "system", "content": self.system_prompt},
+                {"role": "user", "content": user_message},
+            ],
         )
-        text = response.content[0].text
+        text = response.choices[0].message.content
         logger.info(f"[{self.__class__.__name__}] API呼び出し完了 ({len(text)}文字)")
         return text
 

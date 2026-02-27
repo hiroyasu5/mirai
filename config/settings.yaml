@@ -3,8 +3,8 @@
 # モデル設定
 models:
   researcher: "grok-4"
-  analyst: "claude-sonnet-4-20250514"
-  editor: "claude-sonnet-4-20250514"
+  analyst: "gpt-4o-mini"
+  editor: "gpt-4o-mini"
 
 # リサーチ設定
 research:
