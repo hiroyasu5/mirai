@@ -3,7 +3,9 @@ MIRAI - 総合未来予測エージェントチーム
 CLI エントリポイント
 
 Usage:
-    python main.py                      # フルパイプライン実行
+    python main.py                      # dailyモード（1ドメインローテーション）
+    python main.py --mode daily         # dailyモード（明示指定）
+    python main.py --mode full          # 全ドメインフルパイプライン
     python main.py --mode research      # シグナル収集のみ
     python main.py --mode analyze       # キャッシュ済みシグナルを分析
     python main.py --mode track         # 過去予測の精度チェック
@@ -49,9 +51,9 @@ def main():
     )
     parser.add_argument(
         "--mode",
-        choices=["full", "research", "analyze", "track"],
-        default="full",
-        help="実行モード (default: full)",
+        choices=["daily", "full", "research", "analyze", "track"],
+        default="daily",
+        help="実行モード (default: daily)",
     )
     parser.add_argument(
         "--topic",
@@ -92,6 +94,10 @@ def main():
             # 特定ドメインのみ
             report = orchestrator.run_topic(args.topic, use_discord=use_discord)
             print(f"\nレポート生成完了（ドメイン: {args.topic}）")
+
+        elif args.mode == "daily":
+            result = orchestrator.run_daily(use_discord=use_discord)
+            print(f"\ndailyパイプライン完了（ドメイン: {result['domain']}）")
 
         elif args.mode == "research":
             signals = orchestrator.run_research()

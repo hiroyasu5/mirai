@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIRAI - 未来予測レポート</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #38bdf8;
+    --border: #475569;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 50%, #1a1a2e 100%);
+    padding: 3rem 2rem;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+  }
+  .header h1 { font-size: 2.2rem; color: #fff; letter-spacing: 0.1em; }
+  .header p { color: var(--text-muted); margin-top: 0.8rem; }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .report-list { list-style: none; }
+  .report-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 0.8rem;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .report-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .report-item a {
+    display: flex;
+    align-items: center;
+    padding: 1.2rem 1.5rem;
+    color: var(--text);
+    text-decoration: none;
+    gap: 1rem;
+  }
+  .report-icon { font-size: 1.8rem; }
+  .report-date { font-size: 1.1rem; font-weight: 600; }
+  .report-sub { font-size: 0.85rem; color: var(--text-muted); }
+  .empty {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 3rem;
+    font-size: 1.1rem;
+  }
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🔮 MIRAI 未来予測レポート</h1>
+  <p>AI駆動の未来予測 - テクノロジー・経済・社会</p>
+</div>
+
+<div class="container">
+  <ul class="report-list" id="reports"></ul>
+  <div class="empty" id="empty" style="display:none">まだレポートがありません。</div>
+</div>
+
+<div class="footer">
+  🤖 MIRAI（未来予測エージェントチーム）により自動生成
+</div>
+
+<script>
+// docs/ 内のHTMLレポートファイル一覧を自動生成するために、
+// reports.json を読み込んでリスト表示する
+fetch('reports.json')
+  .then(r => r.json())
+  .then(reports => {
+    const list = document.getElementById('reports');
+    const empty = document.getElementById('empty');
+    if (!reports.length) { empty.style.display = 'block'; return; }
+    reports.sort((a, b) => b.date.localeCompare(a.date));
+    reports.forEach(r => {
+      const li = document.createElement('li');
+      li.className = 'report-item';
+      li.innerHTML = `<a href="${r.file}">
+        <span class="report-icon">📊</span>
+        <div>
+          <div class="report-date">${r.date}</div>
+          <div class="report-sub">${r.mode || 'フルレポート'}</div>
+        </div>
+      </a>`;
+      list.appendChild(li);
+    });
+  })
+  .catch(() => {
+    document.getElementById('empty').style.display = 'block';
+  });
+</script>
+
+</body>
+</html>

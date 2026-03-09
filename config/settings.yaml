@@ -2,7 +2,7 @@
 
 # モデル設定
 models:
-  researcher: "grok-4"
+  researcher: "gemini-2.5-flash"
   analyst: "gemini-2.5-flash"
   editor: "gemini-2.5-flash"
 
@@ -47,6 +47,7 @@ discord:
 
 # パイプライン設定
 pipeline:
+  default_mode: daily
   verbose: false
   cache_signals: true
   cache_dir: "data/cache"

@@ -5,6 +5,7 @@ Orchestrator - パイプライン統括
 
 import logging
 from datetime import datetime
+from pathlib import Path
 
 from agents.researcher import Researcher
 from agents.tech_analyst import TechAnalyst
@@ -13,8 +14,14 @@ from agents.social_analyst import SocialAnalyst
 from agents.editor import Editor
 from pipeline.prediction_tracker import PredictionTracker
 from tools.discord_notifier import DiscordNotifier
+from tools.daily_html_renderer import save_daily_html
+from tools.publisher import Publisher, find_latest_html
 
 logger = logging.getLogger(__name__)
+
+
+DOMAIN_ROTATION = ["tech", "econ", "social"]
+LAST_TOPIC_FILE = Path("data/last_topic.txt")
 
 
 class Orchestrator:
@@ -29,6 +36,69 @@ class Orchestrator:
         self.editor = Editor(config)
         self.tracker = PredictionTracker(config["report"]["predictions_file"])
         self.notifier = DiscordNotifier(config)
+        self.publisher = Publisher()
+
+    def _get_next_domain(self) -> str:
+        """ローテーションで次のドメインを決定"""
+        if LAST_TOPIC_FILE.exists():
+            last = LAST_TOPIC_FILE.read_text(encoding="utf-8").strip()
+            try:
+                idx = DOMAIN_ROTATION.index(last)
+                next_domain = DOMAIN_ROTATION[(idx + 1) % len(DOMAIN_ROTATION)]
+            except ValueError:
+                next_domain = DOMAIN_ROTATION[0]
+        else:
+            next_domain = DOMAIN_ROTATION[0]
+
+        # 次回のために記録
+        LAST_TOPIC_FILE.parent.mkdir(parents=True, exist_ok=True)
+        LAST_TOPIC_FILE.write_text(next_domain, encoding="utf-8")
+        return next_domain
+
+    def run_daily(self, use_discord: bool = True) -> dict:
+        """dailyモード: 1ドメインだけ収集→分析→Embed通知"""
+        domain = self._get_next_domain()
+        logger.info("=" * 60)
+        logger.info(f"MIRAI dailyパイプライン開始 (ドメイン: {domain})")
+        logger.info("=" * 60)
+
+        # Step 1: 該当ドメインのシグナル収集
+        topics = self.config["research"]["topics"]
+        signals = {domain: self.researcher.collect_topic(domain, topics[domain])}
+
+        # Step 2: 分析
+        analyst_map = {
+            "tech": self.tech_analyst,
+            "econ": self.econ_analyst,
+            "social": self.social_analyst,
+        }
+        analysis = analyst_map[domain].analyze(signals[domain])
+        self.tracker.save_predictions({domain: analysis})
+
+        # Step 3: dailyレポート生成（JSON形式）
+        report_data = self.editor.generate_daily_report(domain, analysis)
+
+        # Step 4: Discord Embed通知
+        if use_discord:
+            self._notify_daily(domain, report_data)
+
+        logger.info("=" * 60)
+        logger.info(f"MIRAI dailyパイプライン完了 (ドメイン: {domain})")
+        logger.info("=" * 60)
+        return {"domain": domain, "report": report_data}
+
+    def _notify_daily(self, domain: str, report_data: dict) -> None:
+        """daily用: HTML生成→公開→Discord Embed通知"""
+        # dailyレポートのHTML生成・公開
+        html_path = save_daily_html(domain, report_data)
+        report_url = self.publisher.publish(html_path)
+        if report_url:
+            logger.info(f"dailyレポート公開URL: {report_url}")
+
+        if not self.config["discord"]["enabled"]:
+            logger.info("Discord通知はスキップされました（設定で無効）")
+            return
+        self.notifier.send_daily_embed(domain, report_data, report_url=report_url)
 
     def run_full(self, use_discord: bool = True) -> str:
         """フルパイプライン: 収集 → 分析 → レポート → 通知"""
@@ -87,7 +157,26 @@ class Orchestrator:
         """レポート生成のみ"""
         logger.info("--- Phase: レポート生成 ---")
         past = self.tracker.get_past_predictions()
-        return self.editor.generate_report(analyses, past if past else None)
+        previous_report = self._load_previous_report()
+        return self.editor.generate_report(
+            analyses,
+            past if past else None,
+            previous_report=previous_report,
+        )
+
+    def _load_previous_report(self) -> str | None:
+        """reports/ 内の最新レポートを読み込む"""
+        reports_dir = Path(self.config["report"]["output_dir"])
+        if not reports_dir.exists():
+            return None
+
+        report_files = sorted(reports_dir.glob("*.md"), key=lambda p: p.stat().st_mtime)
+        if not report_files:
+            return None
+
+        latest = report_files[-1]
+        logger.info(f"前回レポート読み込み: {latest.name}")
+        return latest.read_text(encoding="utf-8")
 
     def run_track(self) -> dict:
         """過去予測の精度チェック"""
@@ -135,8 +224,16 @@ class Orchestrator:
         return report
 
     def _notify(self, report: str) -> None:
-        """Discord通知"""
+        """GitHub Pagesに公開してからDiscord通知"""
+        # HTMLをGitHub Pagesに公開
+        html_path = find_latest_html()
+        report_url = None
+        if html_path:
+            report_url = self.publisher.publish(html_path)
+            if report_url:
+                logger.info(f"レポート公開URL: {report_url}")
+
         if not self.config["discord"]["enabled"]:
             logger.info("Discord通知はスキップされました（設定で無効）")
             return
-        self.notifier.send_report(report)
+        self.notifier.send_report(report, report_url=report_url)

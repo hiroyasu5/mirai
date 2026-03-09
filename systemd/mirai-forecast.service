@@ -1,0 +1,13 @@
+[Unit]
+Description=MIRAI Daily Forecast
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=tazawa
+WorkingDirectory=/home/tazawa/ドキュメント/GitHub/mirai
+ExecStart=/home/tazawa/.pyenv/versions/3.12.12/bin/python3 main.py --mode daily
+Environment=PYTHONUNBUFFERED=1
+EnvironmentFile=/home/tazawa/ドキュメント/GitHub/mirai/.env
+TimeoutStartSec=600

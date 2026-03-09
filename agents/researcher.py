@@ -1,6 +1,6 @@
 """
-Researcher - Grok x_search によるシグナル収集エージェント
-各ドメイン(tech/econ/social)のXトレンドを収集する
+Researcher - Gemini Google Search によるシグナル収集エージェント
+各ドメイン(tech/econ/social)のトレンドを収集する
 """
 
 import json
@@ -9,18 +9,18 @@ import os
 from datetime import datetime
 from pathlib import Path
 
-from tools.web_search import GrokSearcher
+from tools.web_search import GeminiSearcher
 
 logger = logging.getLogger(__name__)
 
 
 class Researcher:
-    """Grok APIでXトレンドを収集するリサーチャー"""
+    """Gemini APIでトレンドを収集するリサーチャー"""
 
     def __init__(self, config: dict):
         self.config = config
-        self.searcher = GrokSearcher(
-            api_key=os.getenv("GROK_API_KEY"),
+        self.searcher = GeminiSearcher(
+            api_key=os.getenv("GEMINI_API_KEY"),
             model=config["models"]["researcher"],
         )
         self.research_config = config["research"]
@@ -44,8 +44,6 @@ class Researcher:
         signals = self.searcher.search(
             queries=queries,
             topic_label=label,
-            min_likes=self.research_config.get("min_likes", 100),
-            min_retweets=self.research_config.get("min_retweets", 20),
         )
 
         # キャッシュ保存
