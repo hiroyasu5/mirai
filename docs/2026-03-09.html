@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>今日の経済・マーケット予測</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #f59e0b;
+    --border: #475569;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.7;
+  }
+  .header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 50%, #1a1a2e 100%);
+    padding: 2.5rem 2rem; text-align: center;
+    border-bottom: 3px solid var(--accent);
+  }
+  .header h1 { font-size: 1.8rem; color: #fff; }
+  .header .meta { color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem; }
+  .container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .section { margin-bottom: 2rem; }
+  .section-title {
+    font-size: 1.2rem; font-weight: 700; color: var(--accent);
+    margin-bottom: 1rem; padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .summary {
+    background: var(--surface); border: 1px solid var(--border);
+    border-left: 4px solid var(--accent); border-radius: 10px;
+    padding: 1.2rem 1.5rem; font-size: 0.95rem; line-height: 1.8;
+  }
+  .news-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 0.8rem;
+  }
+  .news-headline { font-weight: 600; margin-bottom: 0.3rem; }
+  .news-headline a { color: var(--accent); text-decoration: none; }
+  .news-headline a:hover { text-decoration: underline; }
+  .news-detail { font-size: 0.88rem; color: var(--text-muted); }
+  .pred-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.2rem 1.5rem; margin-bottom: 0.8rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .pred-num {
+    background: var(--accent); color: var(--bg); font-weight: 800;
+    font-size: 1.1rem; min-width: 2.2rem; height: 2.2rem;
+    border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0;
+  }
+  .pred-body { flex: 1; }
+  .pred-text { font-size: 0.92rem; margin-bottom: 0.6rem; }
+  .confidence-bar { display: flex; align-items: center; gap: 0.8rem; }
+  .confidence-track {
+    flex: 1; height: 8px; background: #334155;
+    border-radius: 4px; overflow: hidden;
+  }
+  .confidence-fill { height: 100%; border-radius: 4px; }
+  .confidence-fill.high { background: linear-gradient(90deg, #22c55e, #4ade80); }
+  .confidence-fill.mid { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+  .confidence-fill.low { background: linear-gradient(90deg, #ef4444, #f87171); }
+  .confidence-label { font-size: 0.85rem; font-weight: 700; min-width: 3rem; text-align: right; }
+  .comment {
+    background: rgba(245,158,11,0.1); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.2rem 1.5rem;
+    font-size: 0.92rem; color: var(--text-muted);
+  }
+  .footer {
+    text-align: center; padding: 2rem; color: var(--text-muted);
+    font-size: 0.8rem; border-top: 1px solid var(--border); margin-top: 2rem;
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>💰 今日の経済・マーケット予測</h1>
+  <div class="meta">📅 2026年03月09日 10:35</div>
+</div>
+<div class="container">
+  <div class="section">
+    <div class="summary">地政学的緊張によるインフレ持続と高金利長期化が世界の経済に重くのしかかっています。
+サプライチェーンの構造的変化は不可避で、企業はレジリエンスを重視する時代へ。
+一方で、暗号資産の規制明確化は新たな制度化への動きを促しています。</div>
+  </div>
+  <div class="section">
+    <div class="section-title">📰 注目ニュース</div>
+    
+        <div class="news-card">
+          <div class="news-headline"><a href="Smallworldfs / ING Think / OW Markets" target="_blank" rel="noopener">地政学的緊張がインフレを持続させ、原油価格を高止まり</a></div>
+          <div class="news-detail">中東紛争に起因する緊張が経済不確実性を高め、世界の供給網と物流コストに最大300%増の影響を与えています。</div>
+        </div>
+        <div class="news-card">
+          <div class="news-headline"><a href="Morningstar Nordics / Anadolu Ajansı" target="_blank" rel="noopener">主要中央銀行の利下げ開始時期が後ずれ、「Higher-for-longer」定着へ</a></div>
+          <div class="news-detail">持続的なインフレリスク、堅調な経済データ、エネルギー価格上昇により、米FRB含む主要中銀の利下げはさらに後ずれする見込みです。</div>
+        </div>
+        <div class="news-card">
+          <div class="news-headline"><a href="Whalesbook" target="_blank" rel="noopener">グローバルサプライチェーン、コスト最適化からレジリエンス重視へシフト</a></div>
+          <div class="news-detail">企業は地政学的リスクを常態的なコストと捉え、サプライチェーンの回復力と多角化を優先する戦略に転換しています。</div>
+        </div>
+        <div class="news-card">
+          <div class="news-headline"><a href="MEXC News" target="_blank" rel="noopener">米SECが暗号資産の包括的規制枠組みを提示</a></div>
+          <div class="news-detail">米国証券取引委員会がホワイトハウスに暗号資産の包括的な規制枠組みを提出し、デジタル資産の法的明確化が急速に進展しています。</div>
+        </div>
+        <div class="news-card">
+          <div class="news-headline"><a href="CoinGecko API" target="_blank" rel="noopener">米国下院でCLARITY Actが通過、暗号資産規制本格化</a></div>
+          <div class="news-detail">「デジタル資産市場明確化法案（CLARITY Act）」が米国下院を通過し、上院での審議が進行しており、2026年春の署名に期待が集まります。</div>
+        </div>
+  </div>
+  <div class="section">
+    <div class="section-title">🔮 予測</div>
+    
+        <div class="pred-card">
+          <div class="pred-num">1</div>
+          <div class="pred-body">
+            <div class="pred-text">主要中央銀行の利下げ開始は2026年後半以降にずれ込む可能性が高い。米FRBは現在の政策金利（3.5%-3.75%）を少なくとも2026年Q2末まで維持する見込み。</div>
+            <div class="confidence-bar">
+              <div class="confidence-track">
+                <div class="confidence-fill high" style="width:80%"></div>
+              </div>
+              <span class="confidence-label">80%</span>
+            </div>
+          </div>
+        </div>
+        <div class="pred-card">
+          <div class="pred-num">2</div>
+          <div class="pred-body">
+            <div class="pred-text">地政学的リスクによる物流コストとエネルギー価格の高止まりが継続し、企業のサプライチェーン管理がさらに困難になる。一部の消費財価格には引き続き上昇圧力がかかる。</div>
+            <div class="confidence-bar">
+              <div class="confidence-track">
+                <div class="confidence-fill mid" style="width:70%"></div>
+              </div>
+              <span class="confidence-label">70%</span>
+            </div>
+          </div>
+        </div>
+        <div class="pred-card">
+          <div class="pred-num">3</div>
+          <div class="pred-body">
+            <div class="pred-text">米国における暗号資産の規制明確化は、短期的にはボラティリティの要因となりつつも、長期的な制度化への期待感から市場の安定化に寄与し始める。CLARITY Actの進展が主要な焦点となる。</div>
+            <div class="confidence-bar">
+              <div class="confidence-track">
+                <div class="confidence-fill mid" style="width:70%"></div>
+              </div>
+              <span class="confidence-label">70%</span>
+            </div>
+          </div>
+        </div>
+  </div>
+  <div class='section'><div class='section-title'>💡 ひとこと</div><div class='comment'>変化の激しい時代ですが、このレポートが皆様の賢い意思決定の一助となれば幸いです。新しい機会も生まれていますので、ぜひご注目くださいね。</div></div>
+</div>
+<div class="footer">
+  🤖 MIRAI（未来予測エージェントチーム）により自動生成
+</div>
+</body>
+</html>
