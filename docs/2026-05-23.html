@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIRAI 未来予測レポート - 2026年05月23日 08:03</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --surface2: #334155;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #38bdf8;
+    --tech: #3b82f6;
+    --econ: #f59e0b;
+    --social: #10b981;
+    --risk: #ef4444;
+    --opportunity: #22c55e;
+    --border: #475569;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 0;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 50%, #1a1a2e 100%);
+    padding: 3rem 2rem;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(56,189,248,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(139,92,246,0.1) 0%, transparent 50%);
+  }
+  .header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    position: relative;
+    letter-spacing: 0.1em;
+  }
+  .header h1 .icon { font-size: 2.5rem; vertical-align: middle; margin-right: 0.3em; }
+  .header .meta {
+    color: var(--text-muted);
+    margin-top: 0.8rem;
+    font-size: 0.95rem;
+    position: relative;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .section {
+    margin-bottom: 2.5rem;
+  }
+  .section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+  .section-title .icon { font-size: 1.5rem; }
+
+  /* Executive Summary */
+  .summary-box {
+    background: linear-gradient(135deg, var(--surface) 0%, #1a2744 100%);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.9;
+  }
+
+  /* Top 3 Predictions */
+  .top-predictions {
+    display: grid;
+    gap: 1rem;
+  }
+  .top-pred-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .top-pred-num {
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 800;
+    font-size: 1.2rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .top-pred-content h3 {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+    color: #fff;
+  }
+  .top-pred-content p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* Prediction Tables → Cards */
+  .pred-grid {
+    display: grid;
+    gap: 1rem;
+  }
+  .pred-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .pred-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .pred-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 4px;
+  }
+  .pred-card.domain-tech::before { background: var(--tech); }
+  .pred-card.domain-econ::before { background: var(--econ); }
+  .pred-card.domain-social::before { background: var(--social); }
+
+  .pred-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .pred-id {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  .pred-domain {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .pred-domain.tech { background: rgba(59,130,246,0.2); color: var(--tech); }
+  .pred-domain.econ { background: rgba(245,158,11,0.2); color: var(--econ); }
+  .pred-domain.social { background: rgba(16,185,129,0.2); color: var(--social); }
+
+  .pred-text {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin-bottom: 0.8rem;
+  }
+
+  .confidence-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .confidence-track {
+    flex: 1;
+    height: 8px;
+    background: var(--surface2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .confidence-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+  }
+  .confidence-fill.high { background: linear-gradient(90deg, #22c55e, #4ade80); }
+  .confidence-fill.mid { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+  .confidence-fill.low { background: linear-gradient(90deg, #ef4444, #f87171); }
+  .confidence-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    min-width: 3rem;
+    text-align: right;
+  }
+
+  /* Domain Analysis */
+  .domain-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+  .domain-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+  .domain-header.tech { color: var(--tech); }
+  .domain-header.econ { color: var(--econ); }
+  .domain-header.social { color: var(--social); }
+  .domain-body {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+  .domain-body p { margin-bottom: 0.8rem; }
+  .domain-body ul { padding-left: 1.5rem; margin-bottom: 0.8rem; }
+  .domain-body li { margin-bottom: 0.4rem; }
+  .domain-body strong { color: var(--text); }
+
+  /* Comparison / Evolution */
+  .evolution-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .evolution-status {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .status-hit { background: rgba(34,197,94,0.2); color: #4ade80; }
+  .status-progressing { background: rgba(56,189,248,0.2); color: #38bdf8; }
+  .status-miss { background: rgba(239,68,68,0.2); color: #f87171; }
+  .status-new { background: rgba(168,85,247,0.2); color: #c084fc; }
+
+  /* Risk & Opportunity */
+  .risk-opp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  @media (max-width: 700px) {
+    .risk-opp-grid { grid-template-columns: 1fr; }
+  }
+  .risk-list, .opp-list {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+  }
+  .risk-list { border-top: 3px solid var(--risk); }
+  .opp-list { border-top: 3px solid var(--opportunity); }
+  .risk-list h3, .opp-list h3 {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+  }
+  .risk-list h3 { color: var(--risk); }
+  .opp-list h3 { color: var(--opportunity); }
+  .risk-list li, .opp-list li {
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .risk-list ul, .opp-list ul { padding-left: 1.2rem; }
+
+  /* Indicators */
+  .indicator-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .indicator-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+  .indicator-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+  .indicator-text {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .indicator-text strong { color: var(--text); }
+
+  /* Cross-domain */
+  .cross-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    line-height: 1.8;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+  }
+  .cross-card p { margin-bottom: 0.8rem; }
+  .cross-card strong { color: var(--text); }
+  .cross-card ul { padding-left: 1.5rem; margin-bottom: 0.8rem; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+
+  /* General markdown content styling */
+  .md-content {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+  .md-content p { margin-bottom: 0.8rem; }
+  .md-content ul, .md-content ol { padding-left: 1.5rem; margin-bottom: 0.8rem; }
+  .md-content li { margin-bottom: 0.4rem; }
+  .md-content strong { color: var(--text); }
+  .md-content h3 { color: var(--accent); margin: 1.2rem 0 0.6rem; font-size: 1.05rem; }
+  .md-content h4 { color: var(--text); margin: 1rem 0 0.5rem; font-size: 0.95rem; }
+  .md-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+  }
+  .md-content th, .md-content td {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border);
+    text-align: left;
+    font-size: 0.88rem;
+  }
+  .md-content th {
+    background: var(--surface2);
+    font-weight: 600;
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span class="icon">🔮</span> MIRAI 未来予測レポート</h1>
+  <div class="meta">
+    <span>📅 2026年05月23日 08:03</span> &nbsp;|&nbsp;
+    <span>🔍 分析対象: 直近48時間のトレンド</span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section"><div class="section"><h2 class="section-title"><span class="icon">📋</span> エグゼクティブサマリー</h2><div class="summary-box"><p>2026年5月23日現在、世界は地政学的リスクによる構造的インフレと金融引き締め長期化の圧力に直面しつつ、AIとクリーンエネルギーが牽引する技術革新と社会変革の時代に突入しています。AIコンピューティングパワーハードウェアの需要は爆発的に増加し、サプライチェーンの戦略的要衝化が進む一方で、AIのエネルギー消費問題が顕在化し、持続可能なエネルギー転換の喫緊の課題となっています。社会においては、AIが情報アクセスや産業の基盤として深く浸透する一方で、その倫理的利用と規制のあり方が国際的な議論の中心に浮上しています。</p></div>
+<p>最も重要な予測は以下の3点です。</p>
+<ol>
+<li><strong>AIエコシステムの指数関数的成長と資源制約・倫理課題の顕在化</strong>: AIは情報サービスから製造業のOT/IT統合まで、社会インフラの核として急速に浸透します。この急速な成長は、AIコンピューティングパワーハードウェア（チップ、メモリ、サーバー）の需給を極度にひっ迫させ、価格の高止まりを招きます。同時に、AIデータセンターの膨大な電力消費がクリーンエネルギー転換への新たな負荷となり、倫理的利用と規制の枠組み構築が国際社会の喫緊の課題として浮上します。（確信度：高）</li>
+<li><strong>地政学リスク常態化と高金利環境下での経済成長の構造変化</strong>: 中東情勢の緊迫化に代表される地政学リスクは原油価格高騰とサプライチェーン混乱を通じて構造的なインフレ圧力を維持させ、FRBを含む主要中央銀行は金融引き締めスタンスを長期化または再強化します。これによりグローバル経済は限定的な成長に留まるものの、AI関連技術やクリーンエネルギー、サプライチェーン再編への投資が特定の分野や地域で経済成長を牽引し、国際経済秩序のブロック化と多極化を加速させます。（確信度：高）</li>
+<li><strong>グローバルな「全面電化」への加速とAI電力需要への対応</strong>: COP31で電化が主要優先事項に浮上するなど、世界的に化石燃料からの脱却と電力システム全体の電化が加速します。EV販売の普及や再生可能エネルギーの導入が勢いを増す一方で、AIデータセンターの電力需要急増は電力網の安定性と脱炭素目標達成に新たな課題をもたらします。これにより、AI自体がエネルギー利用を最適化する「グリーンAI」技術の開発と、電化推進のための大規模なインフラ投資が不可欠となります。（確信度：高）</li>
+</ol>
+<hr />
+</div><div class="section"><h2 class="section-title"><span class="icon">🔄</span> 前回予測との比較・変化分析</h2>
+<p>前回レポート（2026年05月22日生成）のエグゼクティブサマリーの内容と、今回の分析結果を比較し、主な変化点を分析します。前回と今回で生成日時が1日しか離れていないため、劇的なトレンドの変化というよりは、<strong>前回のトレンドの深掘りや、新たなデータの強調点、課題の具体化</strong>として記述します。</p>
+<p><strong>前回の主要予測と今回の状況の対比</strong></p>
+<ol>
+<li>
+<p><strong>量子技術の加速とPQC移行が国家安全保障と産業競争力の要に</strong>:</p>
+<ul>
+<li><strong>前回予測</strong>: 量子コンピューティングの性能加速と、ポスト量子暗号（PQC）への移行が国家戦略レベルで加速する。</li>
+<li><strong>今回の状況</strong>: 今回のテクノロジー分析結果JSONには、量子技術に関する直接的なキーシグナルや予測は含まれていません。しかし、前回レポートがわずか1日前の情報であることを鑑みると、このトレンドが消滅したとは考えにくいです。むしろ、今回新たに「AIコンピューティングパワーハードウェアの需要爆発」が短期的な喫緊課題として強力に浮上したため、レポート上での「強調度」が一時的にAI関連技術に移ったと解釈できます。量子技術の重要性は継続しているものの、AIのインパクトがより顕在化・緊急性が高まった状況です。</li>
+<li><strong>分類</strong>: <strong>進行中（AIの喫緊性が増したことによる相対的な焦点のシフト）</strong>。量子技術の進展自体は継続すると推測されますが、本レポートではAI関連の分析結果が中心となります。</li>
+</ul>
+</li>
+<li>
+<p><strong>高金利環境の長期化とAI投資が牽引する経済成長の分化</strong>:</p>
+<ul>
+<li><strong>前回予測</strong>: 主要国の中央銀行は利下げに慎重な姿勢を維持し、高金利環境が長期化する。AI関連技術への投資が特定のセクターや地域経済を牽引し、成長の二極化が鮮明になる。</li>
+<li><strong>今回の状況</strong>: 今回の経済分析において、「地政学リスクによるグローバル経済の減速とインフレ圧力の継続」「主要中央銀行の金融引き締め長期化または再燃の可能性」が明確に示されており、FRBのタカ派的なスタンス維持が裏付けられました。また、テクノロジー分析で「AIコンピューティングパワーハードウェアの需要爆発」が確認され、AI投資の活発さも継続しています。これはまさに「AI投資が牽引する経済成長の分化」が予測通り進行していることを示しています。</li>
+<li><strong>分類</strong>: <strong>進行中（予測の通り進行、エビデンスが強化）</strong>。</li>
+</ul>
+</li>
+<li>
+<p><strong>人口動態変化とAIのエネルギー需要増が社会インフラに新たな負荷</strong>:</p>
+<ul>
+<li><strong>前回予測</strong>: 先進国での人口減少と高齢化が深刻化し、AIによるエネルギー需要増大がクリーンエネルギー移行の足かせとなり、社会インフラと政策の抜本的見直しが迫られる。</li>
+<li><strong>今回の状況</strong>: 今回の社会分析において、「グローバルなエネルギー転換と電化の加速」が強く示され、COP31での電化優先や再生可能エネルギーの成長が確認されました。ただし、AIの電力需要増大という具体的な問題は社会ドメインのJSON分析結果では直接的なキーシグナルとして挙げられていません（テクノロジーの中期予測では「グリーンAIへのシフト」の中で電力消費問題が言及）。前回のレポートで既にAIの電力需要増は認識されており、今回は「電化の加速」というより広範なエネルギー転換の動きの中で、その課題が継続していると解釈できます。人口動態変化については、今回の提供データには直接の言及がないため、前回レポートの文脈を引き継ぎます。</li>
+<li><strong>分類</strong>: <strong>進行中（エネルギー転換が加速する中で、AIによる電力需要増の課題は継続。人口動態の変化は今回は直接的なシグナルなし）</strong>。</li>
+</ul>
+</li>
+</ol>
+<p><strong>新たに浮上したトレンドや予想外の変化</strong></p>
+<ul>
+<li><strong>テクノロジー</strong>:<ul>
+<li>**AIコンピューティングパワーハードウェアの需要爆発とサプライチェーンの戦略的要</li>
+</ul>
+</li>
+</ul></div>
+</div>
+
+<div class="footer">
+  🤖 このレポートは MIRAI（未来予測エージェントチーム）により自動生成されました。<br>
+  情報源: Google Search によるリアルタイムトレンド分析
+</div>
+
+</body>
+</html>
