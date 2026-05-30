@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIRAI 未来予測レポート - 2026年05月31日 08:03</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --surface2: #334155;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #38bdf8;
+    --tech: #3b82f6;
+    --econ: #f59e0b;
+    --social: #10b981;
+    --risk: #ef4444;
+    --opportunity: #22c55e;
+    --border: #475569;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 0;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 50%, #1a1a2e 100%);
+    padding: 3rem 2rem;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(56,189,248,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(139,92,246,0.1) 0%, transparent 50%);
+  }
+  .header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    position: relative;
+    letter-spacing: 0.1em;
+  }
+  .header h1 .icon { font-size: 2.5rem; vertical-align: middle; margin-right: 0.3em; }
+  .header .meta {
+    color: var(--text-muted);
+    margin-top: 0.8rem;
+    font-size: 0.95rem;
+    position: relative;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .section {
+    margin-bottom: 2.5rem;
+  }
+  .section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+  .section-title .icon { font-size: 1.5rem; }
+
+  /* Executive Summary */
+  .summary-box {
+    background: linear-gradient(135deg, var(--surface) 0%, #1a2744 100%);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.9;
+  }
+
+  /* Top 3 Predictions */
+  .top-predictions {
+    display: grid;
+    gap: 1rem;
+  }
+  .top-pred-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .top-pred-num {
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 800;
+    font-size: 1.2rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .top-pred-content h3 {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+    color: #fff;
+  }
+  .top-pred-content p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* Prediction Tables → Cards */
+  .pred-grid {
+    display: grid;
+    gap: 1rem;
+  }
+  .pred-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .pred-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .pred-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 4px;
+  }
+  .pred-card.domain-tech::before { background: var(--tech); }
+  .pred-card.domain-econ::before { background: var(--econ); }
+  .pred-card.domain-social::before { background: var(--social); }
+
+  .pred-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .pred-id {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  .pred-domain {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .pred-domain.tech { background: rgba(59,130,246,0.2); color: var(--tech); }
+  .pred-domain.econ { background: rgba(245,158,11,0.2); color: var(--econ); }
+  .pred-domain.social { background: rgba(16,185,129,0.2); color: var(--social); }
+
+  .pred-text {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin-bottom: 0.8rem;
+  }
+
+  .confidence-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .confidence-track {
+    flex: 1;
+    height: 8px;
+    background: var(--surface2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .confidence-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+  }
+  .confidence-fill.high { background: linear-gradient(90deg, #22c55e, #4ade80); }
+  .confidence-fill.mid { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+  .confidence-fill.low { background: linear-gradient(90deg, #ef4444, #f87171); }
+  .confidence-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    min-width: 3rem;
+    text-align: right;
+  }
+
+  /* Domain Analysis */
+  .domain-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+  .domain-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+  .domain-header.tech { color: var(--tech); }
+  .domain-header.econ { color: var(--econ); }
+  .domain-header.social { color: var(--social); }
+  .domain-body {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+  .domain-body p { margin-bottom: 0.8rem; }
+  .domain-body ul { padding-left: 1.5rem; margin-bottom: 0.8rem; }
+  .domain-body li { margin-bottom: 0.4rem; }
+  .domain-body strong { color: var(--text); }
+
+  /* Comparison / Evolution */
+  .evolution-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .evolution-status {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .status-hit { background: rgba(34,197,94,0.2); color: #4ade80; }
+  .status-progressing { background: rgba(56,189,248,0.2); color: #38bdf8; }
+  .status-miss { background: rgba(239,68,68,0.2); color: #f87171; }
+  .status-new { background: rgba(168,85,247,0.2); color: #c084fc; }
+
+  /* Risk & Opportunity */
+  .risk-opp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  @media (max-width: 700px) {
+    .risk-opp-grid { grid-template-columns: 1fr; }
+  }
+  .risk-list, .opp-list {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+  }
+  .risk-list { border-top: 3px solid var(--risk); }
+  .opp-list { border-top: 3px solid var(--opportunity); }
+  .risk-list h3, .opp-list h3 {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+  }
+  .risk-list h3 { color: var(--risk); }
+  .opp-list h3 { color: var(--opportunity); }
+  .risk-list li, .opp-list li {
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .risk-list ul, .opp-list ul { padding-left: 1.2rem; }
+
+  /* Indicators */
+  .indicator-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .indicator-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+  .indicator-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+  .indicator-text {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .indicator-text strong { color: var(--text); }
+
+  /* Cross-domain */
+  .cross-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    line-height: 1.8;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+  }
+  .cross-card p { margin-bottom: 0.8rem; }
+  .cross-card strong { color: var(--text); }
+  .cross-card ul { padding-left: 1.5rem; margin-bottom: 0.8rem; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+
+  /* General markdown content styling */
+  .md-content {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+  .md-content p { margin-bottom: 0.8rem; }
+  .md-content ul, .md-content ol { padding-left: 1.5rem; margin-bottom: 0.8rem; }
+  .md-content li { margin-bottom: 0.4rem; }
+  .md-content strong { color: var(--text); }
+  .md-content h3 { color: var(--accent); margin: 1.2rem 0 0.6rem; font-size: 1.05rem; }
+  .md-content h4 { color: var(--text); margin: 1rem 0 0.5rem; font-size: 0.95rem; }
+  .md-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+  }
+  .md-content th, .md-content td {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border);
+    text-align: left;
+    font-size: 0.88rem;
+  }
+  .md-content th {
+    background: var(--surface2);
+    font-weight: 600;
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span class="icon">🔮</span> MIRAI 未来予測レポート</h1>
+  <div class="meta">
+    <span>📅 2026年05月31日 08:03</span> &nbsp;|&nbsp;
+    <span>🔍 分析対象: 直近48時間のトレンド</span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section"><div class="section"><h2 class="section-title"><span class="icon">📋</span> エグゼクティブサマリー</h2><div class="summary-box"><p>2026年5月末現在、世界はAI技術の急速な進化とその社会実装の加速フェーズにあります。特にヒューマノイドロボットは実用化段階に入り、製造業を中心に生産性向上と労働力不足解消の鍵を握ると見られています。AIそのものも基盤インフラとして社会に浸透し、より特化した小型モデル（SLM）やマルチエージェントシステムの活用が進むでしょう。</p></div>
+<p>経済面では、地政学的リスクによるインフレ圧力が継続し、主要中央銀行は金利据え置きを維持する見込みで、市場のボラティリティは高いままです。その一方で、<strong>暗号通貨市場は規制の明確化という追い風を受け、2026年下半期に大きな成長が期待される新たな動向</strong>が浮上しています。</p>
+<p>社会面では、柔軟な働き方の需要が引き続き高く、企業はAIを活用して対応を迫られます。しかし、前回予測で強く推進されていたAI駆動型EdTechの領域では、<strong>教育現場でのデジタルデバイスやAIの過度な利用に対する反発と規制強化の動きが顕著</strong>になり、「人間中心」の教育モデルへの回帰が加速する兆候が見られます。</p>
+<p>最も重要な予測は以下の3点です。</p>
+<ol>
+<li><strong>物理AI・ヒューマノイドロボットの産業応用が加速し、AIエコシステムが基盤インフラとして社会に浸透</strong>: Figure AIの生産能力増大（24倍）やHumanoid社とBosch/Schaefflerとの提携など、ヒューマノイドロボットが実用段階へ移行し、製造業を中心に生産性向上と労働力不足解消に貢献します。AIは基盤インフラとして、エージェントやSLMを通じて物理世界への介入能力を高め、社会のあらゆるレイヤーに深く組み込まれていくでしょう。（確信度：高）</li>
+<li><strong>地政学的リスクと金融政策の現状維持がグローバル経済の不確実性を高める中、暗号通貨市場は規制の明確化により急成長</strong>: 中東紛争によるサプライチェーンの混乱とインフレ圧力が継続し、FRBは金利を据え置く見込みです。一方で、米国のDigital Assets CLARITY Actの可決（7月4日目標）により、デジタル資産の法的枠組みが整備され、機関投資家の参入加速で暗号通貨市場が2026年下半期に大きく躍進すると予測されます。（確信度：高）</li>
+<li><strong>教育現場でのAI・デジタルデバイス利用への反発が強まり、「人間中心」の教育モデルへの回帰が加速</strong>: 米国LA統一学区での学校におけるデジタルデバイス使用制限や、主要な教師組合による幼少期でのスクリーン・AI利用禁止提唱など、テクノロジーの教育への過度な導入に対する懸念が表面化しています。これにより、短期的なAI駆動型EdTechの普及ペースが鈍化し、批判的思考力や共感性を重視する「人間中心AI」教育への転換が加速するでしょう。（確信度：中）</li>
+</ol>
+<hr />
+</div><div class="section"><h2 class="section-title"><span class="icon">🔄</span> 前回予測との比較・変化分析</h2>
+<p>前回レポート（2026年05月24日生成）のエグゼクティブサマリーの内容と、今回の分析結果を比較し、主な変化点を分析します。前回と今回で生成日時が1週間離れており、一部のトレンドにおいて顕著な変化や新たな焦点が確認されています。</p>
+<p><strong>前回の主要予測と今回の状況の対比</strong></p>
+<ol>
+<li>
+<p><strong>AIのハードウェア革新とヒューマノイドロボットの産業応用が技術・労働市場を再構築</strong>:</p>
+<ul>
+<li><strong>前回予測</strong>: AIの計算需要増大に対応するため、光ベースやニューロモーフィックといった次世代ハードウェアの開発が加速し、既存インフラへの投資も活発です。特にヒューマノイドロボットは製造業での導入が本格化し、人手不足解消と生産性向上に貢献する一方、労働市場の構造変化を促します。（確信度：高）</li>
+<li><strong>今回の状況</strong>: 今回のテクノロジー分析では、「物理AI・ヒューマノイドロボットの実用化加速」（Figure AIの生産量24倍化、Humanoid社とBosch・Schaefflerとの提携によるRaaSモデル導入）や「次世代コンピューティング技術による性能限界の突破」（積層型シリコンチップ、量子コンピューティングの商用化移行期）が明確に示されています。AIが基盤インフラ化し、エージェントやSLMが多様な形で普及するトレンドも確認され、前回の予測が具体的なエビデンスを伴ってより強力に進行していることが裏付けられました。</li>
+<li><strong>分類</strong>: <strong>進行中（予測の通り進行、具体的な進展が強力なエビデンスにより強化された）</strong>。</li>
+</ul>
+</li>
+<li>
+<p><strong>高金利・高為替ボラティリティがグローバル経済の「新常態」として定着</strong>:</p>
+<ul>
+<li><strong>前回予測</strong>: 主要中央銀行がインフレ抑制を優先し、高金利環境は長期化する見込みです。各国政策の多様化が為替市場のボラティリティを恒常化させ、国際貿易や投資における為替リスク管理が企業の最重要課題となります。これにより、世界経済の成長は鈍化し、国・地域間の経済格差が拡大するでしょう。（確信度：高）</li>
+<li><strong>今回の状況</strong>: 今回の経済分析では、「地政学的リスクによる世界経済の逆風とインフレ圧力」（中東紛争、WEFエコノミスト見解）や「金融政策の現状維持と市場のボラティリティ増大」（FRB金利据え置き見込み、株式・債券市場のボラティリティ増加）が主要トレンドとして明記されており、高金利環境の継続と市場の不確実性は予測通り進行しています。しかし、前回強調された「高為替ボラティリティ」に関する具体的な言及は減少し、代わりに「暗号通貨市場の規制明確化と成長期待」が主要な経済トレンドとして強く浮上しました。</li>
+<li><strong>分類</strong>: <strong>進行中（高金利環境の継続と市場のボラティリティ増大は予測通りだが、為替ボラティリティに関する強調度が相対的に低下し、暗号通貨市場の新たな動向が強く浮上）</strong>。</li>
+</ul>
+</li>
+<li>
+<p><strong>AI駆動型EdTechが教育機会を民主化し、学習社会を加速</strong>:</p>
+<ul>
+<li><strong>前回予測</strong>: AI言語ツールやアダプティブラーニングを核とするEdTech市場は指数関数的に成長し、教育の公平性が増す一方で、デジタルデバイドやAI倫理といった新たな課題も顕在化します。（確信度：高）</li>
+<li><strong>今回の状況</strong>: 今回の社会分析では、前回の予測とは対照的に、「教育現場におけるデジタルデバイスとAIの役割の再評価と規制強化」というトレンドが強く浮上しました。米国の学校でのデジタルデバイス使用制限の動きや、主要な教師組合が幼少期でのスクリーン・AI利用禁止を提唱するなど、テクノロジーの教育への過度な導入に対する社会的な反発と懸念が顕在化しています。前回のレポートがAIのポジティブな影響を強調していたのに対し、今回はその負の側面や導入への抵抗がクローズアップされています。</li>
+<li><strong>分類</strong>: <strong>一部外れ/変化（EdTech市場の長期的な成長自体は継続する可能性もあるが、短期〜中期的な教育現場でのAI・デジタルデバイスの受容と普及ペースについて、社会的な抵抗と規制強化の動きにより予測と異なる方向へシフトしている）</strong>。</li>
+</ul>
+</li>
+</ol>
+<p><strong>新たに浮上したトレンドや予想外の変化</strong></p>
+<ul>
+<li><strong>テクノロジー</strong>:<ul>
+<li><strong>ヒューマノイドロボットの本格的な量産化とRaaSモデルの確立</strong>: Figure AIの生産能力が24倍に向上し、Humanoid社がBosch、Schaefflerとの具体的な提携を通じてRaaSモデルでの産業導入を進めている点は、前回予測の「本格化」を大きく上回るスピードと具体的な展開を示しています。</li>
+<li><strong>AIの基盤インフラ化と多様なSLM・エージェントシステムの普及</strong>: AIが単なるツールから自律思考・協働・物理世界介入が可能な基盤インフラへと進化し、特定用途に特化したSLMやマルチエージェントシステムの台頭は、前回のAI全体の進展予測をより具体的に深掘りする新たなトレンドです。</li>
+<li><strong>積層型シリコンチップ技術のブレークスルー</strong>: イリノイ大学による複数層シリコン積層技術の開発は、ムーアの法則の延長とエネルギー効率改善に寄与し、次世代半導体技術の具体的な進展として新たに強調されました。</li>
+</ul>
+</li>
+<li><strong>経済・マーケット</strong>:<ul>
+<li><strong>暗号通貨市場の規制明確化と成長期待</strong>: Digital Assets CLARITY Actの可決見込みとJPMorganによる「ポジティブな触媒」評価は、前回レポートでは全く言及されていなかった新たな主要トレンドであり、地政学的動向よりも規制進展に市場が強く反応するという行動様式の変化も示しています。</li>
+<li><strong>AIの経済的影響評価の現実化</strong>: AIの長期的な潜在力は認めつつも、即時的な生産性向上に対する楽観的な見方がより控えめになった点は、前回の高揚感から一歩引いた現実的な評価として新たに浮上しました。</li>
+</ul>
+</li>
+<li><strong>社会・文化</strong>:<ul>
+<li><strong>教育現場でのデジタルデバイス・AI利用への強い反発と規制強化</strong>: 前回予測のEdTech推進とは真逆の動きであり、米国での学校におけるデバイス使用制限や教師組合の反対表明は、テクノロジーが社会に浸透する上での新たな摩擦点として強く浮上しました。</li>
+<li><strong>企業主導によるクリーンエネルギー技術開発と導入の加速</strong>: テック企業などが先進地熱やSMRといったクリーンエネルギー技術の商業化に直接投資・協力している点は、政府主導だけでなく企業が積極的に環境問題の解決に乗り出している新たな動きです。</li>
+</ul>
+</li>
+</ul>
+<p><strong>確信度の変動とその理由</strong></p>
+<ul>
+<li><strong>AI駆動型EdTechの短期的な普及と受容（確信度：低下）</strong>:<ul>
+<li><strong>理由</strong>: 前回レポートではAI駆動型EdTechのポジティブな側面と市場成長を強調しましたが、今回の社会分析では「教育現場におけるデジタルデバイスとAIの役割の再評価と規制強化」が प्रमुखなトレンドとして浮上しました。米国の学校でのデバイス使用制限や教師組合によるAI利用禁止提唱など、導入への抵抗が予想以上に強く、短期的な普及ペースや社会受容性に対する確信度が大幅に低下しました。</li>
+</ul>
+</li>
+<li><strong>暗号通貨市場の成長と成熟化（確信度：上昇）</strong>:<ul>
+<li><strong>理由</strong>: 前回のレポートでは主要な言及がありませんでしたが、今回の経済分析で「Digital Assets CLARITY Act」の可決見込みやJPMorganのポジティブな見方など、具体的な規制の進展とそれに伴う市場の信頼性向上、機関投資家参入への期待が高まっているため、この領域の成長に対する確信度が大幅に上昇しました。</li>
+</ul>
+</li>
+</ul>
+<hr />
+</div><div class="section"><h2 class="section-title"><span class="icon">⚡</span> 短期予測（3-6ヶ月）</h2>
+<div class="pred-grid">
+<div class="pred-card domain-tech"><div class="pred-header"><span class="pred-id">1</span><span class="pred-domain tech">テクノロジー</span></div><div class="pred-text">Anthropicを含む主要AI企業から、現行を上回る高性能AIモデルが相次いで公開され、多言語対応と特定地域（日本含む）への迅速な展開が進む。これにより、AIモデル間の競争が激化し、企業によるAI導入の敷居が低下する。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill high" style="width:90%"></div></div><span class="confidence-label">90%</span></div></div>
+<div class="pred-card domain-tech"><div class="pred-header"><span class="pred-id">2</span><span class="pred-domain tech">テクノロジー</span></div><div class="pred-text">製造業や物流業界において、ヒューマノイドロボットの初期導入事例が急増する。特に、ロボットをサービスとして提供するRaaSモデルが注目され、中小企業を含む多様な企業が導入を検討し始める。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill high" style="width:85%"></div></div><span class="confidence-label">85%</span></div></div>
+<div class="pred-card domain-tech"><div class="pred-header"><span class="pred-id">3</span><span class="pred-domain tech">テクノロジー</span></div><div class="pred-text">特定業務に特化したSmall Language Models (SLMs) が、エッジデバイスや組み込みシステムに広く採用されるようになる。これにより、リアルタイム処理やプライバシー保護が求められる分野でのAI活用が加速する。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill high" style="width:80%"></div></div><span class="confidence-label">80%</span></div></div>
+<div class="pred-card domain-econ"><div class="pred-header"><span class="pred-id">4</span><span class="pred-domain econ">経済・マーケット</span></div><div class="pred-text">地政学的緊張（中東）とサプライチェーンの構造的変化により、グローバルなインフレ圧力は継続し、特にエネルギー・物流コストの高止まりが見込まれます。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill high" style="width:85%"></div></div><span class="confidence-label">85%</span></div></div>
+<div class="pred-card domain-econ"><div class="pred-header"><span class="pred-id">5</span><span class="pred-domain econ">経済・マーケット</span></div><div class="pred-text">米国株式市場は一時的に高値を更新したものの、地政学的リスクと企業業績への警戒感から、調整局面に入る可能性があります。一方で、FRBは政策金利を据え置く姿勢を維持します。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill high" style="width:75%"></div></div><span class="confidence-label">75%</span></div></div>
+<div class="pred-card domain-econ"><div class="pred-header"><span class="pred-id">6</span><span class="pred-domain econ">経済・マーケット</span></div><div class="pred-text">Digital Assets CLARITY Actの可決（7月4日目標）により、暗号通貨市場は規制の明確化を受け、2026年下半期に大きな市場ラリーを経験する可能性があります。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill high" style="width:80%"></div></div><span class="confidence-label">80%</span></div></div>
+<div class="pred-card domain-social"><div class="pred-header"><span class="pred-id">7</span><span class="pred-domain social">社会・文化</span></div><div class="pred-text">教育現場でのデジタルデバイス利用制限の拡大と議論の活発化が世界的に進み、米国のLA統一学区のような動きが他の地域にも波及し、日本の教育現場でも同様の議論が表面化し始めるでしょう。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill high" style="width:80%"></div></div><span class="confidence-label">80%</span></div></div>
+<div class="pred-card domain-social"><div class="pred-header"><span class="pred-id">8</span><span class="pred-domain social">社会・文化</span></div><div class="pred-text">企業におけるリモートワークポリシーの柔軟化とAI導入加速が進む。RTO義務化への従業員の強い反発を受け、特に優秀な人材を維持したい企業はハイブリッドワークなどより柔軟なポリシーを導入し、リモートワークを支援するAIツールの導入も急速に進むでしょう。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill high" style="width:75%"></div></div><span class="confidence-label">75%</span></div></div>
+<div class="pred-card domain-social"><div class="pred-header"><span class="pred-id">9</span><span class="pred-domain social">社会・文化</span></div><div class="pred-text">大手テック企業やエネルギー消費量の多い企業が、先進地熱や小型モジュール炉（SMR）など、新たなクリーンエネルギー技術への直接投資や購入契約を、数件公表し始めると予想されます。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:70%"></div></div><span class="confidence-label">70%</span></div></div>
+</div>
+
+</div><div class="section"><h2 class="section-title"><span class="icon">📈</span> 中期予測（1-2年）</h2>
+<div class="pred-grid">
+<div class="pred-card domain-tech"><div class="pred-header"><span class="pred-id">1</span><span class="pred-domain tech">テクノロジー</span></div><div class="pred-text">AIエージェントが単体ではなく、マルチエージェントシステムとして連携し、製造、サプライチェーン、顧客サービスといった複雑なビジネスプロセス全体を自律的に管理・最適化する事例が普及する。これにより、企業運営の効率が劇的に向上する。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill high" style="width:75%"></div></div><span class="confidence-label">75%</span></div></div>
+<div class="pred-card domain-tech"><div class="pred-header"><span class="pred-id">2</span><span class="pred-domain tech">テクノロジー</span></div><div class="pred-text">積層型半導体技術の商用化に向けた動きが本格化し、プロトタイプから特定の高性能コンピューティング向けチップへの採用が始まる。これにより、AIトレーニングやデータセンターの処理能力が向上し、エネルギー効率も改善される。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:70%"></div></div><span class="confidence-label">70%</span></div></div>
+<div class="pred-card domain-tech"><div class="pred-header"><span class="pred-id">3</span><span class="pred-domain tech">テクノロジー</span></div><div class="pred-text">量子コンピューティングが特定の専門領域（例：新素材開発、創薬シミュレーション、金融ポートフォリオ最適化）で古典的コンピューターを上回る「量子優位性」を実証するケースが増加し、商用利用に向けたPoC（概念実証）が活発化する。AIによる量子エラー訂正も進展を見せる。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:65%"></div></div><span class="confidence-label">65%</span></div></div>
+<div class="pred-card domain-econ"><div class="pred-header"><span class="pred-id">4</span><span class="pred-domain econ">経済・マーケット</span></div><div class="pred-text">グローバルサプライチェーンは「効率性」から「レジリエンスとセキュリティ」への転換が加速し、結果として貿易コストの構造的な上昇が常態化します。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:70%"></div></div><span class="confidence-label">70%</span></div></div>
+<div class="pred-card domain-econ"><div class="pred-header"><span class="pred-id">5</span><span class="pred-domain econ">経済・マーケット</span></div><div class="pred-text">グローバル経済成長の鈍化傾向が続く中で、AI投資による生産性向上が一部の先進セクターで顕在化し始め、経済格差を拡大させる可能性があります。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:65%"></div></div><span class="confidence-label">65%</span></div></div>
+<div class="pred-card domain-econ"><div class="pred-header"><span class="pred-id">6</span><span class="pred-domain econ">経済・マーケット</span></div><div class="pred-text">暗号通貨市場は規制の明確化と機関投資家の本格的な参入により、より成熟した資産クラスへと発展し、伝統的な金融システムとの統合が進みます。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:60%"></div></div><span class="confidence-label">60%</span></div></div>
+<div class="pred-card domain-social"><div class="pred-header"><span class="pred-id">7</span><span class="pred-domain social">社会・文化</span></div><div class="pred-text">教育現場での「デジタルデトックス」教育の普及と評価指標の変化が進展し、デジタルデバイス利用を制限する学校が増え、「人間中心のインタラクション」を重視する教育プログラムが開発・導入されます。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:65%"></div></div><span class="confidence-label">65%</span></div></div>
+<div class="pred-card domain-social"><div class="pred-header"><span class="pred-id">8</span><span class="pred-domain social">社会・文化</span></div><div class="pred-text">労働市場の二極化とAIによる生産性格差の拡大が顕著になり、リモート・ハイブリッドワークを許容する企業とRTOを強制する企業の間で人材獲得競争が激化します。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:60%"></div></div><span class="confidence-label">60%</span></div></div>
+<div class="pred-card domain-social"><div class="pred-header"><span class="pred-id">9</span><span class="pred-domain social">社会・文化</span></div><div class="pred-text">地域分散型エネルギーインフラへの大規模投資と既存インフラ転用プロジェクトが、米国を中心に数件の大規模実証段階または商業運用段階に移行すると予想されます。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:60%"></div></div><span class="confidence-label">60%</span></div></div>
+</div>
+
+</div><div class="section"><h2 class="section-title"><span class="icon">🔭</span> 長期予測（5-10年）</h2>
+<div class="pred-grid">
+<div class="pred-card domain-tech"><div class="pred-header"><span class="pred-id">1</span><span class="pred-domain tech">テクノロジー</span></div><div class="pred-text">ヒューマノイドロボットは製造・物流だけでなく、介護、医療、小売、家庭支援など、多様なサービス業や個人生活の領域に普及し、社会インフラの一部として定着する。人間との協働が一般化し、生活の質が大きく向上する。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:70%"></div></div><span class="confidence-label">70%</span></div></div>
+<div class="pred-card domain-tech"><div class="pred-header"><span class="pred-id">2</span><span class="pred-domain tech">テクノロジー</span></div><div class="pred-text">AIが社会・経済活動のあらゆるレイヤーに完全に組み込まれ、自律的な意思決定システムとして機能する。スマートシティの管理、エネルギー網の最適化、パーソナライズされた医療システムなど、社会基盤の最適化をAIが主導する。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:60%"></div></div><span class="confidence-label">60%</span></div></div>
+<div class="pred-card domain-tech"><div class="pred-header"><span class="pred-id">3</span><span class="pred-domain tech">テクノロジー</span></div><div class="pred-text">量子コンピューティング技術が実用段階に達し、特定の超複雑な問題（新エネルギー源開発、気候変動シミュレーション、最適化問題全般）において、現代のスーパーコンピューターを大幅に凌駕する能力を発揮する。これにより、科学技術のフロンティアが大きく拡大する。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:50%"></div></div><span class="confidence-label">50%</span></div></div>
+<div class="pred-card domain-econ"><div class="pred-header"><span class="pred-id">4</span><span class="pred-domain econ">経済・マーケット</span></div><div class="pred-text">グローバル経済は、地政学的・気候変動リスクへの対応を優先する「レジリエンス経済」へと構造的に転換し、特定の戦略的産業への国家介入が常態化します。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill low" style="width:45%"></div></div><span class="confidence-label">45%</span></div></div>
+<div class="pred-card domain-econ"><div class="pred-header"><span class="pred-id">5</span><span class="pred-domain econ">経済・マーケット</span></div><div class="pred-text">AIと関連技術が社会のあらゆる側面を変革し、生産性向上と新たな経済的価値を創出する一方で、広範な社会・倫理的課題が顕在化します。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:50%"></div></div><span class="confidence-label">50%</span></div></div>
+<div class="pred-card domain-econ"><div class="pred-header"><span class="pred-id">6</span><span class="pred-domain econ">経済・マーケット</span></div><div class="pred-text">デジタル資産は、ブロックチェーン技術を基盤とした新たな金融エコシステムの中核を担い、中央銀行デジタル通貨（CBDC）との共存・競争が進みます。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill low" style="width:40%"></div></div><span class="confidence-label">40%</span></div></div>
+<div class="pred-card domain-social"><div class="pred-header"><span class="pred-id">7</span><span class="pred-domain social">社会・文化</span></div><div class="pred-text">「人間中心AI」教育モデルの世界標準化と教育システムの再構築が進み、デジタルツールとAIはあくまで補助的な役割に留め、人間固有の能力育成が重視されるようになります。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill low" style="width:45%"></div></div><span class="confidence-label">45%</span></div></div>
+<div class="pred-card domain-social"><div class="pred-header"><span class="pred-id">8</span><span class="pred-domain social">社会・文化</span></div><div class="pred-text">世界的な高齢化の進展に対応するため、社会保障制度の大規模改革が実施され、AIやロボット技術が高齢者ケア、医療診断、生活支援に不可欠な存在として社会インフラに普及するでしょう。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:50%"></div></div><span class="confidence-label">50%</span></div></div>
+<div class="pred-card domain-social"><div class="pred-header"><span class="pred-id">9</span><span class="pred-domain social">社会・文化</span></div><div class="pred-text">クリーンエネルギー技術の普及と既存化石燃料インフラの転用が世界的規模で進み、エネルギー産業の脱炭素化によるグローバルサプライチェーンと地政学的なパワーバランスが劇的に変化します。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill low" style="width:40%"></div></div><span class="confidence-label">40%</span></div></div>
+</div>
+
+<hr />
+</div><div class="section"><h2 class="section-title"><span class="icon">🔬</span> ドメイン別分析</h2>
+<h3 class="section-title" style="font-size:1.1rem"><span class="icon">💻</span> テクノロジー</h3>
+<p>AI技術の進化は、ハードウェア、アプリケーション、ロボティクスにわたり、驚くべき速度で進行しています。特に注目すべきは、<strong>物理AI・ヒューマノイドロボットの実用化が加速</strong>している点です。Figure AIはFigure 03ヒューマノイドロボットの生産能力を24倍に増やし、Humanoid社はBoschやSchaefflerと提携し、ドイツの製造現場へのHMNDプラットフォームをRaaS（Robot-as-a-Service）モデルで導入するなど、概念実証を超えた大規模な商業展開が目前に迫っています。これにより、製造業を中心に生産性の劇的向上と労働力不足解消に貢献することが期待されます。</p>
+<p>同時に、<strong>AIは単なるツールから基盤インフラへと進化</strong>し、AIエージェントやマルチエージェントシステムが自律的に物理世界に介入する能力を高めています。特定用途に特化したSmall Language Models（SLM）が運用コストを抑え、大規模モデルを上回る性能</p></div>
+</div>
+
+<div class="footer">
+  🤖 このレポートは MIRAI（未来予測エージェントチーム）により自動生成されました。<br>
+  情報源: Google Search によるリアルタイムトレンド分析
+</div>
+
+</body>
+</html>
