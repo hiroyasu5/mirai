@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MIRAI 未来予測レポート - 2026年07月12日 08:03</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --surface2: #334155;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --accent: #38bdf8;
+    --tech: #3b82f6;
+    --econ: #f59e0b;
+    --social: #10b981;
+    --risk: #ef4444;
+    --opportunity: #22c55e;
+    --border: #475569;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 0;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 50%, #1a1a2e 100%);
+    padding: 3rem 2rem;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(56,189,248,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(139,92,246,0.1) 0%, transparent 50%);
+  }
+  .header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    position: relative;
+    letter-spacing: 0.1em;
+  }
+  .header h1 .icon { font-size: 2.5rem; vertical-align: middle; margin-right: 0.3em; }
+  .header .meta {
+    color: var(--text-muted);
+    margin-top: 0.8rem;
+    font-size: 0.95rem;
+    position: relative;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .section {
+    margin-bottom: 2.5rem;
+  }
+  .section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+  }
+  .section-title .icon { font-size: 1.5rem; }
+
+  /* Executive Summary */
+  .summary-box {
+    background: linear-gradient(135deg, var(--surface) 0%, #1a2744 100%);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.9;
+  }
+
+  /* Top 3 Predictions */
+  .top-predictions {
+    display: grid;
+    gap: 1rem;
+  }
+  .top-pred-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .top-pred-num {
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 800;
+    font-size: 1.2rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .top-pred-content h3 {
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+    color: #fff;
+  }
+  .top-pred-content p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* Prediction Tables → Cards */
+  .pred-grid {
+    display: grid;
+    gap: 1rem;
+  }
+  .pred-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .pred-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .pred-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 4px;
+  }
+  .pred-card.domain-tech::before { background: var(--tech); }
+  .pred-card.domain-econ::before { background: var(--econ); }
+  .pred-card.domain-social::before { background: var(--social); }
+
+  .pred-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .pred-id {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  .pred-domain {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .pred-domain.tech { background: rgba(59,130,246,0.2); color: var(--tech); }
+  .pred-domain.econ { background: rgba(245,158,11,0.2); color: var(--econ); }
+  .pred-domain.social { background: rgba(16,185,129,0.2); color: var(--social); }
+
+  .pred-text {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin-bottom: 0.8rem;
+  }
+
+  .confidence-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .confidence-track {
+    flex: 1;
+    height: 8px;
+    background: var(--surface2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .confidence-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+  }
+  .confidence-fill.high { background: linear-gradient(90deg, #22c55e, #4ade80); }
+  .confidence-fill.mid { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+  .confidence-fill.low { background: linear-gradient(90deg, #ef4444, #f87171); }
+  .confidence-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    min-width: 3rem;
+    text-align: right;
+  }
+
+  /* Domain Analysis */
+  .domain-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
+  .domain-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+  .domain-header.tech { color: var(--tech); }
+  .domain-header.econ { color: var(--econ); }
+  .domain-header.social { color: var(--social); }
+  .domain-body {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+  .domain-body p { margin-bottom: 0.8rem; }
+  .domain-body ul { padding-left: 1.5rem; margin-bottom: 0.8rem; }
+  .domain-body li { margin-bottom: 0.4rem; }
+  .domain-body strong { color: var(--text); }
+
+  /* Comparison / Evolution */
+  .evolution-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .evolution-status {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .status-hit { background: rgba(34,197,94,0.2); color: #4ade80; }
+  .status-progressing { background: rgba(56,189,248,0.2); color: #38bdf8; }
+  .status-miss { background: rgba(239,68,68,0.2); color: #f87171; }
+  .status-new { background: rgba(168,85,247,0.2); color: #c084fc; }
+
+  /* Risk & Opportunity */
+  .risk-opp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  @media (max-width: 700px) {
+    .risk-opp-grid { grid-template-columns: 1fr; }
+  }
+  .risk-list, .opp-list {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.2rem 1.5rem;
+  }
+  .risk-list { border-top: 3px solid var(--risk); }
+  .opp-list { border-top: 3px solid var(--opportunity); }
+  .risk-list h3, .opp-list h3 {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+  }
+  .risk-list h3 { color: var(--risk); }
+  .opp-list h3 { color: var(--opportunity); }
+  .risk-list li, .opp-list li {
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .risk-list ul, .opp-list ul { padding-left: 1.2rem; }
+
+  /* Indicators */
+  .indicator-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .indicator-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+  .indicator-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+  .indicator-text {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .indicator-text strong { color: var(--text); }
+
+  /* Cross-domain */
+  .cross-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    line-height: 1.8;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+  }
+  .cross-card p { margin-bottom: 0.8rem; }
+  .cross-card strong { color: var(--text); }
+  .cross-card ul { padding-left: 1.5rem; margin-bottom: 0.8rem; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+  }
+
+  /* General markdown content styling */
+  .md-content {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+  .md-content p { margin-bottom: 0.8rem; }
+  .md-content ul, .md-content ol { padding-left: 1.5rem; margin-bottom: 0.8rem; }
+  .md-content li { margin-bottom: 0.4rem; }
+  .md-content strong { color: var(--text); }
+  .md-content h3 { color: var(--accent); margin: 1.2rem 0 0.6rem; font-size: 1.05rem; }
+  .md-content h4 { color: var(--text); margin: 1rem 0 0.5rem; font-size: 0.95rem; }
+  .md-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+  }
+  .md-content th, .md-content td {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border);
+    text-align: left;
+    font-size: 0.88rem;
+  }
+  .md-content th {
+    background: var(--surface2);
+    font-weight: 600;
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span class="icon">🔮</span> MIRAI 未来予測レポート</h1>
+  <div class="meta">
+    <span>📅 2026年07月12日 08:03</span> &nbsp;|&nbsp;
+    <span>🔍 分析対象: 直近48時間のトレンド</span>
+  </div>
+</div>
+
+<div class="container">
+  <div class="section"><div class="section"><h2 class="section-title"><span class="icon">📋</span> エグゼクティブサマリー</h2><div class="summary-box"><p>2026年7月12日現在、世界情勢は地政学リスクの劇的な激化と、それに伴う経済・テクノロジー・社会構造への深い影響を経験しています。特に、<strong>米イラン戦争の勃発とホルムズ海峡の航行困難</strong>は、グローバルなエネルギーサプライチェーンを再編し、原油価格に継続的な上昇圧力をもたらしています。このインフレ圧力の再燃懸念から、前回レポートで予測されたFRBの利下げ期待は後退し、<strong>FRBはタカ派的スタンスを維持</strong>し、市場は金利動向に一層敏感に反応する可能性が高まっています。</p></div>
+<p>テクノロジー分野では、AIの進化が止まらない一方で、データセンター中心から<strong>エッジAIへの普及が加速</strong>しています。これに対応するため、ニューロモルフィックコンピューティングなどの<strong>AIに特化した新しいハードウェアアーキテクチャ</strong>の研究開発と初期商用化に向けた動きが活発化しており、AIの省電力化と高効率化を推進するでしょう。量子コンピューティングも理論段階から実用化・インフラ展開へとフェーズが移行しつつあります。</p>
+<p>社会面では、<strong>グローバルな高齢化が加速</strong>し、年金・医療システムへの圧力が深刻化する一方で、「シルバーエコノミー」の成長機会も拡大しています。また、AIと自動化の進展は<strong>労働市場の構造を根本的に変化</strong>させ、企業における恒常的な小規模レイオフとリモートワークにおけるキャリア格差の顕在化という新たな社会課題を生み出しています。AIデータセンターによる膨大な電力需要を背景に、クリーンエネルギーへの投資は<strong>経済安全保障の柱として加速</strong>しており、2026年には3.4兆ドル規模に達する見込みです。しかし、EdTechにおけるAI活用が進む一方で、過度なデジタルツールへの依存が生徒の集中力や創造的・批判的思考力を低下させる懸念も浮上しています。</p>
+<p>最も重要な予測は以下の3点です。</p>
+<ol>
+<li><strong>地政学リスクの長期化とFRBのタカ派継続による金融市場の不安定化</strong>: 米イラン戦争の勃発とホルムズ海峡の航行困難は、エネルギーサプライチェーンを再編し、原油価格のボラティリティを維持します。これによりインフレ圧力の懸念が高まり、FRBはタカ派的スタンスを維持せざるを得ず、市場は金利動向に過敏に反応し、ドルは底堅く推移し、リスク資産はFRB政策に左右されるでしょう。</li>
+<li><strong>AIの分散化と新たなハードウェアアーキテクチャの台頭</strong>: AIはデータセンター中心からエッジデバイスへの普及を加速し、ニューロモルフィックコンピューティングなどの省電力・高効率な新アーキテクチャの研究開発と初期商用化が進行します。これにより、産業用IoT、スマートデバイス、自動運転など多様な産業でAIの実用化が進む一方で、AIハードウェアの標準化やサプライチェーンの地政学リスクが新たな課題となります。</li>
+<li><strong>社会構造変革とクリーンエネルギーへの転換の加速</strong>: グローバルな高齢化が加速し、社会保障システムに圧力をかける一方で、AI・自動化による労働市場の構造変化と雇用不安が顕在化します。同時に、AIデータセンターの電力需要増大を背景に、クリーンエネルギーへの投資が経済安全保障と直結し、計画通り加速。教育分野ではAI活用が進むものの、倫理的利用やデジタルデトックスの重要性も認識されるでしょう。</li>
+</ol>
+<hr />
+</div><div class="section"><h2 class="section-title"><span class="icon">🔄</span> 前回予測との比較・変化分析</h2>
+<p>前回レポート（2026年07月05日 08:02生成）から約1週間が経過し、特に地政学的状況において劇的な変化が見られました。これにより、経済および関連する社会・テクノロジー予測に大きな修正が生じています。</p>
+<h3>前回の主要予測と今回の状況の対比</h3>
+<ol>
+<li>
+<p><strong>AI/ロボティクスによる産業・社会変革の加速と半導体供給のボトルネック</strong>:</p>
+<ul>
+<li><strong>推移</strong>: <strong>進行中、かつ大幅に加速・深化</strong>。<ul>
+<li><strong>AIインフラ・半導体</strong>: 前回は「HBMおよびDRAMの深刻な供給不足が短期的なハードウェア展開のボトルネックとなる懸念が高まっています」と予測しましたが、今回の分析では、この課題に対応するための<strong>「ニューロモルフィックコンピューティング」</strong>や<strong>「エッジAIに特化したハードウェアアーキテクチャ」</strong>への投資と開発が活発化していることが明確になりました。AIがデータセンターだけでなく、多様なエッジデバイスへと普及を広げる中で、省電力・高効率なハードウェアの需要が加速しています。</li>
+<li><strong>ヒューマノイドロボット</strong>: 前回「ヒューマノイドロボットも産業用途で実用化へ」と予測しましたが、今回はテクノロジー分析でAIハードウェアアーキテクチャの進化に焦点が移っており、より広範なAI分散化のトレンドの一部として捉えられています。</li>
+</ul>
+</li>
+<li><strong>変化点</strong>: 前回指摘された半導体供給のボトルネックは引き続き懸念されるものの、市場はそれを乗り越えるための新たなAIハードウェアアーキテクチャの開発と、AIの利用をエッジへと分散化させる動きを強めています。これにより、AI技術の適用範囲と形態が多様化する方向性がより明確になりました。</li>
+</ul>
+</li>
+<li>
+<p><strong>FRBの金融緩和加速と地政学リスク下の市場変動</strong>:</p>
+<ul>
+<li><strong>推移</strong>: <strong>方向転換、かつ地政学リスクが大幅に激化</strong>。<ul>
+<li><strong>FRB政策と市場</strong>: 前回「米雇用統計の軟化はFRBの利下げ開始観測を強め、早ければ2026年Q3/Q4にも利下げが開始される可能性があります。これにより、ドル安と暗号通貨などリスク資産への資金流入が加速する一方…」と予測しました。しかし、今回の分析では<strong>「米イラン戦争の勃発とホルムズ海峡の航行困難」</strong>という極めて重大な地政学的イベントが発生。これにより原油価格高騰によるインフレ圧力再燃の懸念が急激に高まり、<strong>FRBがタカ派的スタンスを維持し、利下げ期待が後退する</strong>可能性が強まりました。市場の焦点は利下げからインフレ動向とFRBの政策維持へと大きくシフトしています。ドルは底堅く推移し、リスク資産への資金流入はFRB政策に左右される展開が予想されます。</li>
+<li><strong>地政学リスク</strong>: 前回「ホルムズ海峡などでの地政学的緊張が常態化し、原油価格高騰やインフレ再燃リスクが市場のボラティリティを高めるでしょう」と予測しましたが、今回は「米イラン戦争の勃発」により、このリスクが<strong>現実の紛争へと発展</strong>し、エネルギーサプライチェーンへの具体的な影響（米国からの原油輸出急増、航行困難）が顕在化しています。</li>
+</ul>
+</li>
+<li><strong>変化点</strong>: 前回の利下げ期待に基づく金融緩和シナリオは、地政学的状況の劇的な悪化（米イラン戦争）により、インフレ再燃とFRBのタカ派継続という、真逆のシナリオへと転換しました。これは、短期的な市場予測において最も大きな変化であり、市場のセンチメントと通貨動向に甚大な影響を与えています。</li>
+</ul>
+</li>
+<li>
+<p><strong>再生可能エネルギー主導の経済構造転換とAI/EdTechによる教育革命</strong>:</p>
+<ul>
+<li><strong>推移</strong>: <strong>進行中、かつ深化と課題の顕在化</strong>。<ul>
+<li><strong>再生可能エネルギー</strong>: 前回「再生可能エネルギーの経済的優位性が明確になり、政府・企業投資が加速、『脱化石燃料』への移行が地域経済構造を変革します」と予測しましたが、今回の分析では「世界のクリーンエネルギー投資が2026年には3.4兆ドルに達する見込み」と具体的な数字で裏付けられ、投資の加速が確認されました。AIデータセンターの電力需要増大が、信頼性が高く安価なクリーン電力の必要性をさらに高めていることが明確になりました。</li>
+<li><strong>AI/EdTech</strong>: 前回「AIとEmbodied AIロボティクスがEdTechに統合され、個別最適化されたカリキュラムと教師の役割変化を促し、未来のスキル育成を加速させるでしょう」と予測しました。しかし、今回の社会分析では、EdTech市場でのベンチャーキャピタル資金減少による<strong>市場統合期への移行</strong>や、<strong>過度なデジタルツールへの依存が生徒の集中力や創造的・批判的思考力を低下させる懸念</strong>、さらに<strong>教育機関でのAIポリシー整備の遅れ</strong>といった、導入に伴う具体的な課題と負の側面が新たに浮上しています。</li>
+</ul>
+</li>
+<li><strong>変化点</strong>: クリーンエネルギーへの移行は予測通り加速していますが、AI/EdTechに関しては、単なる導入推進だけでなく、その倫理的利用、教育効果への影響、そして制度的対応が喫緊の課題として認識され始めている点が大きな変化です。</li>
+</ul>
+</li>
+</ol>
+<h3>新たに浮上したトレンドや予想外の変化</h3>
+<ul>
+<li><strong>米イラン戦争の勃発</strong>: 最も劇的な変化であり、グローバル経済、特にエネルギー市場に多大な影響を与えています。</li>
+<li><strong>FRBの金融政策における焦点の転換</strong>: 利下げ期待からインフレ抑制のためのタカ派スタンス維持へとシフト。</li>
+<li><strong>AIハードウェアアーキテクチャの多様化</strong>: ニューロモルフィックコンピューティングやエッジAIへのシフトが、AIの普及と省電力化の鍵として浮上。</li>
+<li><strong>金価格の避難資産としての役割の変化</strong>: 地政学リスクへの反応が限定的になり、FRBの金融政策（実質金利）に強く連動する傾向。</li>
+<li><strong>EdTechにおけるデジタル依存の懸念</strong>: AI活用が進む中での、生徒の集中力低下や創造性への悪影響が課題として顕在化。</li>
+<li><strong>リモートワークにおけるキャリア格差の顕在化</strong>: 柔軟な働き方の定着が、新たな社会課題を生み出している。</li>
+</ul>
+<h3>確信度の変動とその理由</h3>
+<p>前回レポートでは個別の予測に対する確信度が明記されていなかったため、今回は新たに確信度を設定します。しかし、前回の予測に対する方向性の変化と、その理由を明確にします。</p>
+<ul>
+<li><strong>FRBの利下げ開始とドル安トレンドの顕在化</strong>: 前回（2026年07月05日）は利下げ観測が強まり「ドル安トレンドの顕在化」を予測していましたが、今回は<strong>「FRBのタカ派的スタンス維持と市場の金利敏感性向上」</strong>（短期予測、確信度0.8）へと予測の方向性が大きく転換しました。<ul>
+<li><strong>理由</strong>: 米イラン戦争の勃発により原油価格高騰とインフレ圧力再燃の懸念が極めて高まり、FRBが利下げに踏み切る環境ではなくなったためです。市場は来週発表される米CPIに注目し、FRBの政策決定を待つ展開になるでしょう。</li>
+</ul>
+</li>
+<li><strong>地政学リスクによる原油価格の高騰とインフレ圧力の再燃リスク</strong>: 前回（2026年07月05日）は「ホルムズ海峡などでの地政学的緊張が常態化し、原油価格高騰やインフレ再燃リスクが市場のボラティリティを高めるでしょう」と予測しましたが、これは<strong>「中東情勢緊迫化によるエネルギー価格のボラティリティ維持」</strong>（短期予測、確信度0.7）として、リスクが現実化した状況と、その継続を予測しています。<ul>
+<li><strong>理由</strong>: 米イラン戦争の勃発により、ホルムズ海峡の航行困難が現実のものとなり、エネルギー供給の不確実性が高まりました。この状況は短期的に継続すると考えられます。</li>
+</ul>
+</li>
+</ul>
+<hr />
+</div><div class="section"><h2 class="section-title"><span class="icon">⚡</span> 短期予測（3-6ヶ月）</h2>
+<div class="pred-grid">
+<div class="pred-card domain-tech"><div class="pred-header"><span class="pred-id">1</span><span class="pred-domain tech">テクノロジー</span></div><div class="pred-text">ニューロモルフィックチップの初期商用化に向けたロードマップ公開と開発者向けツールキットのリリース。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill high" style="width:80%"></div></div><span class="confidence-label">80%</span></div></div>
+<div class="pred-card domain-tech"><div class="pred-header"><span class="pred-id">2</span><span class="pred-domain tech">テクノロジー</span></div><div class="pred-text">主要なAIチップメーカーやクラウドプロバイダーが、エッジAIに特化した新製品ラインナップや最適化されたソフトウェアソリューションを発表。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill high" style="width:90%"></div></div><span class="confidence-label">90%</span></div></div>
+<div class="pred-card domain-econ"><div class="pred-header"><span class="pred-id">3</span><span class="pred-domain econ">経済・マーケット</span></div><div class="pred-text">FRBのタカ派的スタンス維持と市場の金利敏感性向上。来週発表される米CPIの結果次第で、インフレ高止まりが確認されればFRBは利上げや高金利維持の姿勢を崩さず、市場はこれに過敏に反応する。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill high" style="width:80%"></div></div><span class="confidence-label">80%</span></div></div>
+<div class="pred-card domain-econ"><div class="pred-header"><span class="pred-id">4</span><span class="pred-domain econ">経済・マーケット</span></div><div class="pred-text">AI関連株主導の市場ラリーの継続とセクター選好の深化。米国ハイテク株の続伸が日本のAI関連株にも波及し、当面はこのトレンドが継続するが、一部で過熱感からの短期的な調整リスクも孕む。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:70%"></div></div><span class="confidence-label">70%</span></div></div>
+<div class="pred-card domain-econ"><div class="pred-header"><span class="pred-id">5</span><span class="pred-domain econ">経済・マーケット</span></div><div class="pred-text">中東情勢緊迫化によるエネルギー価格のボラティリティ維持。米イラン戦争によるホルムズ海峡の航行困難が継続し、原油価格は高騰傾向が続き、一時的に$90-100/バレルを超える可能性もある。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:70%"></div></div><span class="confidence-label">70%</span></div></div>
+<div class="pred-card domain-social"><div class="pred-header"><span class="pred-id">6</span><span class="pred-domain social">社会・文化</span></div><div class="pred-text">AI導入と効率化を理由とする小規模なレイオフが続き、労働市場における雇用不安が表面化する。特にリモートワーカーはキャリア形成において不利になる傾向が続く。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill high" style="width:80%"></div></div><span class="confidence-label">80%</span></div></div>
+<div class="pred-card domain-social"><div class="pred-header"><span class="pred-id">7</span><span class="pred-domain social">社会・文化</span></div><div class="pred-text">EdTech分野でのAI活用が進む一方で、倫理的利用やデータプライバシーに関する議論が活発化し、教育機関でのAIポリシー策定の動きが加速する。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:70%"></div></div><span class="confidence-label">70%</span></div></div>
+<div class="pred-card domain-social"><div class="pred-header"><span class="pred-id">8</span><span class="pred-domain social">社会・文化</span></div><div class="pred-text">クリーンエネルギー分野への投資が計画通り増加し、特に送電網や蓄電技術など、インフラ整備への重点的な取り組みが各国政府から報告される。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill high" style="width:80%"></div></div><span class="confidence-label">80%</span></div></div>
+</div>
+
+</div><div class="section"><h2 class="section-title"><span class="icon">📈</span> 中期予測（1-2年）</h2>
+<div class="pred-grid">
+<div class="pred-card domain-tech"><div class="pred-header"><span class="pred-id">1</span><span class="pred-domain tech">テクノロジー</span></div><div class="pred-text">特定のデータセンターや産業用途で、ニューロモルフィックまたはAI特化型アクセラレータの限定的な商用導入が開始される。市場規模は10億ドル規模に達する見込み。</div><div class="confidence-bar"><div class="confidence-track"><div class="confidence-fill mid" style="width:60%"></div></div><span class="confidence-label">60%</span></div></div>
+</div>
+<p>| 2 | 韓国に続き、欧州、北米、日本などの主要国でもイ</p></div>
+</div>
+
+<div class="footer">
+  🤖 このレポートは MIRAI（未来予測エージェントチーム）により自動生成されました。<br>
+  情報源: Google Search によるリアルタイムトレンド分析
+</div>
+
+</body>
+</html>
